@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tutorials</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Content</th>
+      <th>Metadata</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tutorials.each do |tutorial| %>
+      <tr>
+        <td><%= tutorial.user_id %></td>
+        <td><%= tutorial.name %></td>
+        <td><%= tutorial.content %></td>
+        <td><%= tutorial.metadata %></td>
+        <td><%= link_to 'Show', tutorial %></td>
+        <td><%= link_to 'Edit', edit_tutorial_path(tutorial) %></td>
+        <td><%= link_to 'Destroy', tutorial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tutorial', new_tutorial_path %>
