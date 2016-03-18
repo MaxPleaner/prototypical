@@ -47,4 +47,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "users_plugin", path: "./users_plugin"
+gem "users_plugin", path: "./plugins/users_plugin"
+gem "online_plugin", path: "./plugins/online_plugin"
+gem "tutorials_plugin", path: "./plugins/tutorials_plugin"
+gem "tutors_plugin", path: "./plugins/tutors_plugin"

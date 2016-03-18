@@ -21,3 +21,4 @@ child = ChildClass.new
 child.foo = "bar"
 puts child.foo
 # => "bar"
+

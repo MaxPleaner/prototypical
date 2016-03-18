@@ -1,17 +1,17 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "online_plugin/version"
+require "tutors_plugin/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "online_plugin"
-  s.version     = OnlinePlugin::VERSION
+  s.name        = "tutors_plugin"
+  s.version     = TutorsPlugin::VERSION
   s.authors     = ["maxpleaner"]
   s.email       = ["maxpleaner@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of OnlinePlugin."
-  s.description = "TODO: Description of OnlinePlugin."
+  s.homepage    = "http://google.com"
+  s.summary     = "http://google.com: Summary of TutorsPlugin."
+  s.description = "http://google.com: Description of TutorsPlugin."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
