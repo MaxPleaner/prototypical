@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = UsersPlugin::VERSION
   s.authors     = ["maxpleaner"]
   s.email       = ["maxpleaner@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of UsersPlugin."
-  s.description = "TODO: Description of UsersPlugin."
+  s.homepage    = "http://google.com"
+  s.summary     = "http://google.com"
+  s.description = "http://google.com: Description of UsersPlugin."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
