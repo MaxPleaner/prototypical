@@ -51,3 +51,9 @@ gem "users_plugin", path: "./plugins/users_plugin"
 gem "online_plugin", path: "./plugins/online_plugin"
 gem "tutorials_plugin", path: "./plugins/tutorials_plugin"
 gem "tutors_plugin", path: "./plugins/tutors_plugin"
+
+gem "awesome_print"
+
+# gem "capybara"
+# gem "capybara-webkit"
+# gem "launchy"

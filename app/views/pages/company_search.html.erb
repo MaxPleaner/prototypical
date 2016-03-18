@@ -1,0 +1,19 @@
+<form action="company_search" method="GET">
+  <strike><input type="hidden" name="name" placeholder="name"></strike> <br>
+  <input type="hidden" name="search" value="true">
+  <input type="text" name="location" placeholder="location"> <br>
+  <input type="tags" name="tags" placeholder="tags, comma-separated"> <br>
+  <input type="submit" value="search cobmpany"> 
+</form>
+
+<% if !!@results %>
+  <pre><%= raw @results.html_safe %></pre>
+<% end %>
+
+<script>
+$(function(){
+
+  var $body = $("body");
+  $body.html(ansi_up.ansi_to_html($body.html()))
+})
+</script>

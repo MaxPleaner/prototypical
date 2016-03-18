@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   get "/", to: 'pages#main'
-
+  get "/company_search", to: "pages#company_search"
+  
+  get "/company_search2", to: "pages#company_search2"
+  
   mount UsersPlugin::Engine => "/users"
   mount OnlinePlugin::Engine => "/online"
   mount TutorialsPlugin::Engine => "/tutorials"

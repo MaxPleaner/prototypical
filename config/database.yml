@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: Prototypical_production
-  username: Prototypical
-  password: <%= ENV['PROTOTYPICAL_DATABASE_PASSWORD'] %>
+  username: max
+  password: 
