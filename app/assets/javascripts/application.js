@@ -13,5 +13,31 @@
 //= require jquery
 //= require jquery_ujs
 //= require ansi_up
+//= require masonry
+//= require images_loaded
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+
+$(function(){
+  // Tried using multiple grid selectors, turns out it has no effect.
+  // A single grid selector can be used for multiple grids.
+  [
+    [".grid", ".grid-item"],
+    // [".navgrid, .navgrid-item"]
+  ].forEach(
+    function(grid_class_pair){
+      var $grid = $(grid_class_pair[0]).masonry({
+        // options
+        itemSelector: grid_class_pair[1],
+        columnWidth: 200
+      });
+      $grid.imagesLoaded().progress( function() {
+        $grid.masonry('layout');
+      });
+    }
+  )
+
+
+})

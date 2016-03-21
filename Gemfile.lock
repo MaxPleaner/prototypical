@@ -63,7 +63,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.0.0)
+    autoprefixer-rails (6.3.3.1)
+      execjs
     awesome_print (1.6.1)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     byebug (8.2.2)
     coffee-rails (4.1.1)
@@ -73,13 +78,18 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    colored (1.2)
     concurrent-ruby (1.0.1)
     debug_inspector (0.0.2)
+    domain_name (0.5.20160310)
+      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -96,14 +106,26 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mechanize (2.7.4)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0)
+      mime-types (>= 1.17.2, < 3)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.6)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     method_source (0.8.2)
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    net-http-digest_auth (1.4)
+    net-http-persistent (2.9.4)
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    ntlm-http (0.1.1)
     pg (0.18.4)
     puma (3.1.1)
     rack (2.0.0.alpha)
@@ -169,10 +191,14 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.2)
     web-console (3.1.1)
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
+    webrobots (0.1.2)
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -182,11 +208,14 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
+  colored
   jbuilder (~> 2.0)
   jquery-rails
   listen (~> 3.0.5)
+  mechanize
   online_plugin!
   pg (~> 0.18)
   puma

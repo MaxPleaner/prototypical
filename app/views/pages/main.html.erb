@@ -1,8 +1,11 @@
-<pre>
-  <a href="/users">login</a>
-  <a href="/online">who's online</a>
-  <a href="/tutorials">tutorials</a>
-  <a href="/tutors">tutors</a>
-  <a href="/company_search">company_search</a>
-</pre>
+<%= render "nav" %>  
 
+<hr>
+
+<div class="grid">
+  <section class="grid-item"><%= render "users" %></section>
+  <section class="grid-item"><%= render "online" %></section>
+  <section class="grid-item"><%= render "tutorials" %></section>
+  <section class="grid-item"><%= render "tutors" %></section>
+  <section class="grid-item"><%= render "company_search" %></section>
+</div>

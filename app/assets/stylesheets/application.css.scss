@@ -1,0 +1,49 @@
+/*
+
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+
+ *= require_tree .
+ *= require_self
+ */
+
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  background: blue;
+}
+
+.section {
+  @extend .jumbotron;
+  margin: 15px;
+  padding: 20px;
+  background: darken(green, 10%);
+}
+
+.grid-item, .grid-item-small {
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 10px;
+}
+.grid-item {
+  width: 500px;
+}
+.grid-item-small {
+  width: 150px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.box-link {
+  @extend .btn;
+  @extend .btn-default;
+  box-shadow: 0 0 10px orange;
+  transition: background 1.5s ease-in;
+  background: lighten(orange, 50%);
+}
+.box-link:hover {
+  background: lighten(orange, 25%);
+}
+
