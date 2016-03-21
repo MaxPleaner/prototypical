@@ -16,7 +16,7 @@
 //= require masonry
 //= require images_loaded
 //= require bootstrap-sprockets
-//= require turbolinks
+// require turbolinks
 //= require_tree .
 
 
