@@ -1,0 +1,10 @@
+rake db:create;
+rake db:migrate;
+cd plugins/online_plugin;
+rake db:migrate;
+cd ../tutorials_plugin
+rake db:migrate;
+cd ../tutors_plugin;
+rake db:migrate;
+cd ../users_plugin;
+rake db:migrate;

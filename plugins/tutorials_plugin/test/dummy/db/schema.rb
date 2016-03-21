@@ -23,27 +23,11 @@ ActiveRecord::Schema.define(version: 20160318055235) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "online_plugin_tutors", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "metadata"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tutorials_plugin_tutorials", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "content"
     t.text     "metadata"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users_plugin_users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.text     "metadata"
-    t.text     "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
