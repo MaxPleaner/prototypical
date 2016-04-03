@@ -17,6 +17,7 @@ class User < ApplicationRecord
     [messages, sent_messages].each do |query|
       results << query.where(from_user_id: other_user.id)
                       .or(query.where(user_id: other_user.id))
+                      .or(query.where(user_id: self.id, from_user_id: self.id))
                       .order(created_at: :desc).to_a
     end
     results.flatten.sort_by { |msg| msg.created_at }
@@ -32,7 +33,9 @@ class User < ApplicationRecord
       other_user = User.find_by(id: id2)
       Conversation.new(
         other_user: other_user,
-        messages: self.messages_with(other_user).map(&:content)
+        messages: self.messages_with(other_user)
+                      .uniq { |msg| msg.id }
+                      .map(&:content)
       )
     end
   end
