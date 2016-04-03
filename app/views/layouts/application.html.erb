@@ -12,5 +12,6 @@
   <body>
     <%= raw flash[:messages]&.join("<br>")&.html_safe %> <hr>
     <%= yield %>
+    <% console %>
   </body>
 </html>

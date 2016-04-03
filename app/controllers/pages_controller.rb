@@ -10,15 +10,27 @@ class PagesController < ApplicationController
       flash[:messages] << "invalid credentials"
     else
       user = User.create(user_params)
-      flash[:messages] << user.valid? ? "created & logged in" : user.errors.full_messages.join("<br>")
+      if user.persisted?
+        login!(user)
+        flash[:messages] << "created & logged in"
+      else
+        flash[:messages] << user.errors.full_messages.join
+      end
     end
     redirect_to :back
   end
   def logout
-    @current_user && @current_user.logout
+    @current_user && logout!(@current_user)
     redirect_to :back
   end
   def login
+    user = User.find_by(email: params[:email])
+    if user && user.password_is?(params[:password])
+      login!(user)
+    else
+      flash[:messages] << "invalid credentials"
+    end
+    redirect_to :back
   end
   private
     def user_params

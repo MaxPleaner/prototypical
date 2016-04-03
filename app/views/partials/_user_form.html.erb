@@ -21,15 +21,15 @@
     <div class="col-xs-12 col-sm-2">
       
       <% if user.persisted? %>
-        <form skip-sockets class="logout-form" method="POST" action="logout">
+        <form skip-sockets class="notform logout-form" method="POST" action="logout">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="submit" value="logout">
+          <input class="button" type="submit" value="logout">
         </form>
       <% else %>
         <button toggles=".login-form">login</button> <br>
         <form skip-sockets class="login-form" method="POST" action="login">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="text" name="email" placeholder="name"> <br>
+          <input type="text" name="email" placeholder="email"> <br>
           <input type="password" name="password" placeholder="password"> <br>
           <input type="submit" value="submit">
         </form>

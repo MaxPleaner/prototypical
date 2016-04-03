@@ -7,12 +7,13 @@
  *= require_tree .
 */
 
-button {
+button, .button {
   margin: 1px;
   padding: 4px;
+  width: 100%;
 }
 
-form {
+form:not(.notform) {
   border: 1px solid grey;
   padding: 4px;
   background: lighten(beige, 15%);
@@ -22,8 +23,4 @@ form {
     margin: 1px;
     padding: 4px;
   }
-}
-
-button {
-  width: 100%;
 }
