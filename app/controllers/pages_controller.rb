@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
   def main
   end
+  def ping
+    user = User.find_by(id: params[:id])
+    user && User.update(last_ping_at: Time.now.to_i)
+    head :no_content
+  end
   def register
     if (user = User.find_by(id: params[:id])) && user.is_user?(@current_user) &&\
                                                  user.password_is?(params[:password])

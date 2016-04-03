@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   post "/register", to: "pages#register"
   post "/login", to: "pages#login"
   post "/logout", to: "pages#logout"
+  get "/ping", to: "pages#ping"
 end
