@@ -1,14 +1,15 @@
 <container id="user">
+  <h4>User profile page</h4>
+  <b>Name: <%= @user.name %></b><br>
+  <b>Email: <%= @user.email %></b> <br> <hr>
   <% if @user.is_user?(@current_user) %>
-    <button class="notbutton" toggles="#inbox">Inbox</button> <br>
-    <%= render "partials/inbox" %> <br>
+    <%= render "partials/inbox" %> <br>     <hr>
   <% elsif @user %>
+    <b>Conversation</b> <br> <br>
     <% @current_user.messages_with(@user).each do |msg| %>
-      <li><%= msg.content %></li>
+      <li><i><%= msg.from_user.name %></i>: <%= msg.content_string %></li>
     <% end %>
   <% end %>
-  <button class="notbutton" toggles="#new-message">
-    send_message
-  </button> <br>
+  <hr>
   <%= render "partials/new_message" %>
 </container>

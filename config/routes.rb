@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get "/user", to: "pages#user"
   get "/user/:id", to: "pages#user"
   get "/new_message", to: "pages#new_message"
+  get "/message", to: "pages#message"
 end

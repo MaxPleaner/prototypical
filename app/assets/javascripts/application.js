@@ -16,7 +16,3 @@
 //= require socket_helpers
 // require turbolinks
 //= require_tree .
-
-$(function(){
-  SocketHelpers.initialize(["user"], "localhost:3000/websocket")
-})

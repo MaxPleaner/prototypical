@@ -1,21 +1,36 @@
 class PagesController < ApplicationController
   def main
   end
-
+  def message
+    message = Message.find_by(id: params[:id])
+    if message
+      if message.user.eql?(@current_user)
+        message.update(viewed: true)
+        flash[:messages] << "marked message as viewed"
+        redirect_to "/user?id=#{message.from_user.id}"
+      else
+        flash[:messages] << "not permitted to view that message"
+        redirect_to "/"
+      end
+    else
+      flash[:messages] << "message not found"
+      redirect_to "/"
+    end
+  end
   def new_message
     if @current_user
       to_user = User.find_by(id: params[:user_id])
       if to_user
-        Message.create(
+        message = Message.create(
           content: params[:content],
           user_id: to_user.id,
           from_user_id: @current_user.id
         )
-        send_msg_to(to_user, params[:content])
-        redirect_to :back
+        send_msg_to(to_user, message)
+        redirect_to "/"
       else
         flash[:messages] << "user not found; can't send message to them"
-        redirect_to :back
+        redirect_to "/"
       end
     else
       flash[:messages] << "Please log in again"
@@ -57,7 +72,7 @@ class PagesController < ApplicationController
         user.update(user_params)
         flash[:messages] << "updated user"
     elsif user
-      flash[:messages] << "invalid credentials"
+      flash[:messages] << "cant update, invalid password given"
     else
       user = User.create(user_params)
       if user.persisted?
@@ -68,13 +83,13 @@ class PagesController < ApplicationController
         flash[:messages] << user.errors.full_messages.join
       end
     end
-    redirect_to :back
+    redirect_to "/"
   end
 
   def logout
     @current_user && logout!(@current_user)
     websocket_response(@current_user, "destroy")
-    redirect_to :back
+    redirect_to "/"
   end
 
   def login
@@ -85,7 +100,7 @@ class PagesController < ApplicationController
     else
       flash[:messages] << "invalid credentials"
     end
-    redirect_to :back
+    redirect_to "/"
   end
 
   private

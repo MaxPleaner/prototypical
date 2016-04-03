@@ -13,11 +13,15 @@ class ApplicationController < ActionController::Base
   before_action :set_messages
   def set_messages
     flash[:messages] ||= []
+    sign_in_string = "Signed in as #{@current_user&.name}"
+    if @current_user
+      flash[:messages] << sign_in_string unless flash[:messages].include?(sign_in_string)
+    end
   end
 
   def login!(user)
     raise ArgumentError unless user.persisted?
-    user.update(session_token: SecureRandom.urlsafe_base64)
+    user.update(session_token: SecureRandom.urlsafe_base64.gsub("-", ""))
     session[:current_user_id] = user.id
   end
 
@@ -28,16 +32,10 @@ class ApplicationController < ActionController::Base
   end
 
   def send_msg_to(user, msg)
-    message = user # altering the class via singleton
-    message.define_singleton_method(:attributes) {
-      {
-        'msg' => msg,
-        'id' => SecureRandom.urlsafe_base64
-      }
-    }
-    message.define_singleton_method(:record_class) {
-      "user#{user.session_token}"
-    }
+    message = WebsocketMessage.new(
+      msg: msg,
+      published_class: "user#{user.session_token}"
+    )
     websocket_response(message, "create")
   end
 
