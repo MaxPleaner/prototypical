@@ -1,8 +1,10 @@
 <% if @current_user %>
   <container id="inbox">
-    <% @current_user.conversations.each do |conversation| %>
+    <% conversations = @current_user.conversations %>
+    <%= "empty" if conversations.empty? %>
+    <% conversations.each do |conversation| %>
       <a href="/user/<%= conversation.other_user.id %>"><%= conversation.other_user.name || "ned" %></a>
-      <pre><%= conversation.messages.last(3).reverse %></pre>
+      <pre><%= conversation.messages.last(3).reverse.join("\n") %></pre>
     <% end %>
   </container>
 <% end %>

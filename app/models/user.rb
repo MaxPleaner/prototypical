@@ -27,8 +27,9 @@ class User < ApplicationRecord
     other_user_ids = [messages, sent_messages].map do |query|
       query.pluck(:user_id, :from_user_id)
     end.map do |array|
-      array.reject { |id2| id2.eql?(self.id) }
-    end.flatten.reject { |id2| id2.eql?(self.id) }
+      array.reject { |id2| id2.eql?(self.id) && !(array.all? { |id| id.eql?(self.id) }) }
+    end.flatten.uniq
+    # byebug
     other_user_ids.map do |id2|
       other_user = User.find_by(id: id2)
       Conversation.new(
