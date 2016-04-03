@@ -7,10 +7,14 @@
  *= require_tree .
 */
 
-button, .button {
+button:not(.notbutton), .button {
   margin: 1px;
   padding: 4px;
   width: 100%;
+}
+
+.notform {
+  display: inline-block;
 }
 
 form:not(.notform) {

@@ -18,5 +18,5 @@
 //= require_tree .
 
 $(function(){
-  SocketHelpers.initialize([], "localhost:3000/websocket")
+  SocketHelpers.initialize(["user"], "localhost:3000/websocket")
 })

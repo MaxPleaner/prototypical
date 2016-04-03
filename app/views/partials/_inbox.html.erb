@@ -1,0 +1,8 @@
+<% if @current_user %>
+  <container id="inbox">
+    <% @current_user.conversations.each do |conversation| %>
+      <a href="/user/<%= conversation.other_user.id %>"><%= conversation.other_user.name || "ned" %></a>
+      <pre><%= conversation.messages.first(3).join("\n") %></pre>
+    <% end %>
+  </container>
+<% end %>

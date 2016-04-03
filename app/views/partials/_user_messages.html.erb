@@ -1,0 +1,9 @@
+<% if @current_user %>
+  <container id="user-messages">
+    <div class="user<%= @current_user.session_token%>-index">
+      <div template="">
+        <li><span template-attr="msg"></span></li>
+      </div>
+    </div>
+  </container>
+<% end %>

@@ -1,20 +1,5 @@
-
 <% user =  @current_user %>
 <%= render "partials/user_form", user: user %>
-
-<% if @current_user %>
-  <div class="hidden">
-    <form id="ping-form" action="ping">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="id" value="<%= @current_user.id %>">
-    </form>
-    <script>
-      $(function(){
-        window.setInterval(function(){
-          $("#ping-form").trigger("submit");
-          console.log("pinging")
-        }, 5000)
-      })
-    </script>
-  </div>
-<% end %>
+<%= render "partials/user_pinger" %>
+<%= render "partials/user_list" %>
+<%= render "partials/user_messages" %>
