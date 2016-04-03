@@ -12,5 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require websocket_rails/main
+//= require socket_helpers
+// require turbolinks
 //= require_tree .
+
+$(function(){
+  SocketHelpers.initialize([], "localhost:3000/websocket")
+})
