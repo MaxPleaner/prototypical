@@ -1,0 +1,23 @@
+<% if @current_user %>
+  <h4>Alerts
+  <form class="notform" skip-sockets action="/clear_all">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="user_id" value="<%= @user&.id %>">
+    <input type="submit" value="clear all">
+  </form>
+  </h4>
+  <container id="user-messages">
+    <div class="user<%= @current_user.session_token%>-index">
+      <div template="">
+        <li>
+          <b><span template-attr="sender_name"></span></b>
+          <span template-attr="msg"></span> - <form skip-sockets class="notform" action="/message">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="id" template-attr="id">
+            <input type="submit" value="link">
+          </form>
+        </li>
+      </div>
+    </div>
+  </container>
+<% end %>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prototypical</title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+<!-- Navbar -->
+    <b><a href="/">root</a></b> <br> <br>
+    <% if @current_user %>
+      <b><a href="/user?id=<%= @current_user.id %>">Inbox</a></b>
+    <% end %>
+    <br>
+    <hr>
+
+<!-- Flash messages -->
+    <%= raw flash[:messages]&.join("<br>")&.html_safe %> <hr>
+    
+
+<!-- Alerts (notifications) -->
+    <%= render "partials/user_messages" %> <hr>
+
+<!-- Page-specific content -->
+    <%= yield %>
+
+<!-- Non visible content -->
+    <% if @current_user %>
+      <div init="user<%= @current_user.session_token %>">
+        <% messages = @current_user.messages.where(viewed: false).map do |msg| %>
+          <% {'id' => msg.id, 'record_class' => "user#{@current_user.session_token}", 'msg' => msg.content_string, 'sender_name' => msg.from_user.name } %>
+        <% end %>
+        <%= Oj.dump(messages.to_a) %>
+      </div>
+    <% end %>
+    <script>
+      $(function(){
+        SocketHelpers.initialize(["user", "<%= "user#{@current_user.session_token if @current_user}" %>"], "localhost:3000/websocket")
+      })
+    </script>
+
+  </body>
+</html>

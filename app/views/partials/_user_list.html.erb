@@ -1,0 +1,20 @@
+<container id="user-list">
+  <h4>Online users</h4>
+  <div class="user-index">
+    <div template="">
+      <li><span template-attr="email"></span>
+        <form class="notform" skip-sockets action="/user">
+          <input type="hidden" name="id" template-attr="id">
+          <input type="submit" value="profile">
+        </form>
+      </li>
+    </div>
+  </div>
+</container>
+
+<div init="user">
+  <% @users = User.where("session_token IS NOT NULL").map do |user| %>
+    <% user.attributes.merge('record_class' => 'user') %>
+  <% end %>
+  <%= Oj.dump(@users.to_a) %>
+</div>

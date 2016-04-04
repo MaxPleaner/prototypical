@@ -1,0 +1,41 @@
+<% @user ||= User.new %>
+<% user ||= @user %>
+
+<container class="container" id="user-form">
+<div class="row">
+
+    <div class="col-sm-2 col-xs-12">
+      
+      <button toggles=".register-form"><%= user.persisted? ? "edit profile" : "register" %></button> <br>
+      <form class="register-form" skip-sockets action="/register" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="id" value="<%= user.id %>">
+        <input value="<%= user.name %>" type="text" name="name" placeholder="name"> <br>
+        <input value="<%= user.email %>" type="email" name="email" placeholder="email"> <br>
+        <input type="password" name="password" placeholder="password"> <br>
+        <input type="submit" value="submit">
+      </form> <br>
+
+    </div>
+
+    <div class="col-xs-12 col-sm-2">
+      
+      <% if user.persisted? %>
+        <form skip-sockets class="notform logout-form" method="POST" action="/logout">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input class="button" type="submit" value="logout">
+        </form>
+      <% else %>
+        <button toggles=".login-form">login</button> <br>
+        <form skip-sockets class="login-form" method="POST" action="/login">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="text" name="email" placeholder="email"> <br>
+          <input type="password" name="password" placeholder="password"> <br>
+          <input type="submit" value="submit">
+        </form>
+      <% end %>
+
+    </div>
+
+</div>
+</container>

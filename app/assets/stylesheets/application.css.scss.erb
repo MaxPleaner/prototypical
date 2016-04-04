@@ -1,0 +1,35 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require bootstrap
+ *= require_tree .
+*/
+
+button:not(.notbutton), .button {
+  margin: 1px;
+  padding: 4px;
+  width: 100%;
+}
+
+.notform {
+  display: inline-block;
+}
+
+form:not(.notform) {
+  border: 1px solid grey;
+  padding: 4px;
+  background: lighten(beige, 15%);
+  display: inline-block;
+  margin: 15px;
+  input {
+    margin: 1px;
+    padding: 4px;
+  }
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
