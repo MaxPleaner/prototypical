@@ -46,6 +46,11 @@ The idea is to hire quality tutors at a lower rate than other platforms.
     2. Javascript pings the server every 5 seconds (until the browser tab is closed)
     3. A background process runs every 10 seconds and signs out any users which have stopped pinging.
     4. websocket updates are pushed whenever a user signs in or out.
+  - **what does the `PING=true` command line argument do**
+    - when starting the server with `PING=true rails server` as opposed to just `rails server`, two things happen:
+      1. The background job (`config/initializers/user_pings.rb`) starts
+      2. The Javascript pinging client is activated (each client will ping the server every 5 seconds) 
+    - This can be annoying in development, which is why it can be disabled by ommitting the command line argument.
 
 ##### Relevant files
 
