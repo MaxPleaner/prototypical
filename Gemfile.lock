@@ -40,6 +40,8 @@ GEM
       tzinfo (~> 1.1)
     arel (7.0.0)
     bcrypt (3.1.11)
+    braintree (2.33.1)
+      builder (>= 2.0.0)
     builder (3.2.2)
     byebug (8.2.2)
     coffee-rails (4.1.1)
@@ -61,6 +63,9 @@ GEM
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     ffi (1.9.10)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hiredis (0.6.1)
@@ -195,8 +200,10 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  braintree (~> 2.33.1)
   byebug
   coffee-rails (~> 4.1.0)
+  figaro (~> 0.7.0)
   jbuilder (~> 2.0)
   jquery-rails
   listen (~> 3.0.5)

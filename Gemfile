@@ -50,3 +50,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "websocket-rails"
 gem "socket_helpers"
+gem 'braintree', '~> 2.33.1'
+gem "figaro", '~> 0.7.0'

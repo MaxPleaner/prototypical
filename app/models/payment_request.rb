@@ -1,4 +1,11 @@
 class PaymentRequest < ApplicationRecord
+
+  has_one(
+    :payment,
+    :foreign_key: :payment_request_id,
+    class_name: "Payment",
+    primary_key: :id
+  )
   
   belongs_to(
     :user,
