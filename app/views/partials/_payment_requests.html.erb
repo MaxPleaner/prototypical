@@ -1,15 +1,15 @@
 <b>Payment requests</b> <br> <br>
-<% current_user.payment_requests.where(from_user_id: user.id).each do |req| %>
+<% current_user.payment_requests.where(from_user_id: user.id).order(created_at: :desc).each do |req| %>
   <li>
     <i><%= req.from_user.name %></i>: <%= req.length %> minutes (<%= current_user.price_for(req.length) %>)
     <% if req.accepted %>
       <% if req.paid %>
+        <b>accepted, paid</b>
+      <% else %>
         <b>accepted, awaiting payment</b>
         <% if req.from_user.is_user?(@current_user) %>
           <a href="/pay?id=<%= req.id %>">pay</a>
         <% end %>
-      <% else %>
-        <b>accepted, paid</b>
       <% end %>
     <% else %>
       <% if req.user.is_user?(@current_user) %>

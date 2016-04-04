@@ -14,7 +14,7 @@
 <!-- Navbar -->
     <b><a href="/">root</a></b> <br> <br>
     <% if @current_user %>
-      <b><a href="/user?id=<%= @current_user.id %>">Inbox</a></b>
+      <b><a href="/user?id=<%= @current_user.id %>">inbox / profile</a></b>
     <% end %>
     <br>
       <%= render "partials/user_form", user: @current_user %>
@@ -35,7 +35,7 @@
         <% messages = @current_user.messages.where(viewed: false).map do |msg| %>
           <% {'id' => msg.id, 'record_class' => "user#{@current_user.session_token}", 'msg' => msg.content_string, 'sender_name' => msg.from_user.name } %>
         <% end %>
-        <%= Oj.dump(messages.to_a) %>
+        <%= Oj.dump(messages.to_a.reverse) %>
       </div>
     <% end %>
     <script>
