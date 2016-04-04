@@ -4,9 +4,10 @@
   <b>Email: <%= @user.email %></b> <br> <hr>
   <% if @user.is_user?(@current_user) %>
     <%= render "partials/inbox" %> <br>     <hr>
-  <% elsif @user %>
+  <% end %>
+  <% if @user %>
     <b>Conversation</b> <br> <br>
-    <% @current_user.messages_with(@user).each do |msg| %>
+    <% @current_user.messages_with(@user).uniq(&:id).each do |msg| %>
       <li><i><%= msg.from_user.name %></i>: <%= msg.content_string %></li>
     <% end %>
   <% end %>

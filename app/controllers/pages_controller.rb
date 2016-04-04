@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   end
   def new_message
     if @current_user
-      to_user = User.find_by(id: params[:user_id])
+      to_user = User.find_by(id: params[:id])
       if to_user
         message = Message.create(
           content: params[:content],
@@ -27,7 +27,7 @@ class PagesController < ApplicationController
           from_user_id: @current_user.id
         )
         send_msg_to(to_user, message)
-        redirect_to "/"
+        redirect_to "/user/#{to_user.id}"
       else
         flash[:messages] << "user not found; can't send message to them"
         redirect_to "/"
@@ -67,7 +67,7 @@ class PagesController < ApplicationController
   end
 
   def register
-    if (user = User.find_by(id: params[:id])) && user.is_user?(@current_user) &&\
+    if (user = User.find_by(email: params[:email])) && user.is_user?(@current_user) &&\
                                                  user.password_is?(params[:password])
         user.update(user_params)
         flash[:messages] << "updated user"
