@@ -12,7 +12,7 @@ The idea is to hire quality tutors at a lower rate than other platforms.
 
 **System dependencies**: Postgres
 
-**Configuration**: Add Braintree credentials (see `config/application.yml.example`, used by [figaro](https://github.com/laserlemon/figaro))
+**Configuration**: Add Braintree credentials (see [config/application.yml.example](config/application.yml.example), used by [figaro](https://github.com/laserlemon/figaro))
 
 **Start app**: `rake db:create db:migrate; PING=true rails s` and open `localhost:3000`
 
@@ -33,7 +33,7 @@ The idea is to hire quality tutors at a lower rate than other platforms.
 ##### Background processes
 
   - Instead of something like Resque, I'm using a backgrounding system I wrote.
-  - See `app/models/ticker.rb` for the base class and `config/initializers/user_pings.rb` for a usage example.
+  - See [app/models/ticker.rb](app/models/ticker.rb) for the base class and [config/initializers/user_pings.rb](config/initializers/user_pings.rb) for a usage example.
   - This background process system can also be seen in my [tickers](https://github.com/maxpleaner/tickers) project or on my codereview.stackexchange.com post [here](codereview.stackexchange.com/questions/122159/a-two-method-program-for-running-background-jobs)
 
 ##### Websockets / realtime
@@ -58,16 +58,16 @@ Notifications about payment requests are sent to the unread messages section.
 
 when starting the server with `PING=true rails server` as opposed to just `rails server`, two things happen:
 
-  1. The background job (`config/initializers/user_pings.rb`) starts
+  1. The background job ([config/initializers/user_pings.rb](config/initializers/user_pings.rb)) starts
   2. The Javascript pinging client is activated (each client will ping the server every 5 seconds) 
 
 This can be annoying in development, which is why it can be disabled by ommitting the command line argument.
 
 ##### Relevant files
 
-  - (app/assets/javascripts/application.js.erb)[app/assets/javascripts/application.js.erb)
+  - [app/assets/javascripts/application.js.erb](app/assets/javascripts/application.js.erb)
   - app/assets/javascripts/braintree.js (the braintree Javascript SDK, minified)
-  - (app/assets/stylesheets/application.css.scss.erb)[app/assets/stylesheets/application.css.scss.erb]
+  - [app/assets/stylesheets/application.css.scss.erb](app/assets/stylesheets/application.css.scss.erb)
   - app/assets/stylesheets/bootstrap.css (Bootstrap CSS, minified)
   - [app/controllers/application_controller.rb](app/controllers/application_controller.rb)
   - [app/controllers/pages_controller.rb](app/controllers/pages_controller.rb) (**all of the app's controller actions are here**)
