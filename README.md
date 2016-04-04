@@ -6,7 +6,7 @@ The idea is to hire quality tutors at a lower rate than other platforms.
 
 -----
 
-### Basic stuff
+## Basic stuff
 
 **Ruby version**: 2.3.0 and up (uses the `&.` "[safe navigation operator](http://mitrev.net/ruby/2015/11/13/the-operator-in-ruby/)" and Rails 5)
 
@@ -19,6 +19,8 @@ The idea is to hire quality tutors at a lower rate than other platforms.
 **Test suite**: there isn't one :sweat_smile:
 
 -----
+
+## More detailed info
 
 ##### Database tables
 
