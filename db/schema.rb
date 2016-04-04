@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403202159) do
+ActiveRecord::Schema.define(version: 20160404073800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20160403202159) do
     t.integer  "from_user_id"
     t.text     "content"
     t.boolean  "viewed",       default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "payment_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "from_user_id"
+    t.integer  "length"
+    t.boolean  "accepted",     default: false
+    t.boolean  "paid",         default: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
@@ -39,9 +49,14 @@ ActiveRecord::Schema.define(version: 20160403202159) do
     t.string   "email"
     t.text     "password"
     t.text     "session_token"
+    t.integer  "five_minute_cost"
+    t.integer  "fifteen_minute_cost"
+    t.integer  "thirty_minute_cost"
+    t.integer  "sixty_minute_cost"
+    t.string   "skills"
     t.integer  "last_ping_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
 end

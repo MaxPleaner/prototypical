@@ -1,6 +1,85 @@
 class PagesController < ApplicationController
+  
   def main
   end
+
+  def accept_payment_request
+    if @current_user
+      _payment_request = PaymentRequest.find_by(id: params[:id])
+      if _payment_request
+        if _payment_request.user.is_user?(@current_user)
+          _payment_request.update(accepted: true)
+          message = Message.create(
+            content: "payment request for #{_payment_request.length} minutes was accepted",
+            user_id: _payment_request.from_user.id,
+            from_user_id: @current_user.id
+          )
+          send_msg_to(_payment_request.from_user, message)
+          redirect_to "/user/#{_payment_request.from_user.id}"
+        else
+          flash[:messages] << "invalid credentials"
+          redirect_to "/"
+        end
+      else
+        flash[:messages] << "payment request not found"
+        redirect_to "/"
+      end
+    else
+      flash[:messages] << "please log in again"
+      redirect_to "/"
+    end
+  end
+
+  def decline_payment_request
+    if @current_user
+      _payment_request = PaymentRequest.find_by(id: params[:id])
+      if _payment_request
+        if _payment_request.user.is_user?(@current_user)
+          message = Message.create(
+            content: "payment request for #{_payment_request.length} minutes was declined",
+            user_id: _payment_request.from_user.id,
+            from_user_id: @current_user.id
+          )
+          send_msg_to(_payment_request.from_user, message)
+          redirect_url = "/user/#{_payment_request.from_user.id}"
+          _payment_request.delete
+          redirect_to redirect_url
+        else
+          flash[:messages] << "invalid credentials"
+          redirect_to "/"
+        end
+      else
+        flash[:messages] << "payment request not found"
+        redirect_to "/"
+      end
+    else
+      flash[:messages] << "please log in again"
+      redirect_to "/"
+    end    
+  end
+
+  def payment_request
+    if @current_user
+      user = User.find_by(id: params[:id])
+      if user && params[:length]
+        _payment_request = PaymentRequest.create(user_id: user.id, from_user_id: @current_user.id, length: params[:length])
+        message = Message.create(
+          content: "new payment request: #{params[:length]} minutes",
+          user_id: user.id,
+          from_user_id: @current_user.id
+        )
+        send_msg_to(user, message)
+        redirect_to "/user/#{user.id}"        
+      else
+        flash[:messages] << "failed to send request: user not found"
+        redirect_to "/"
+      end
+    else
+      flash[:messages] << "Please log in again"
+      redirect_to "/"
+    end
+  end
+
   def clear_all
     if @current_user
       @current_user.messages.where(viewed: false).update_all(viewed: true)
@@ -15,6 +94,7 @@ class PagesController < ApplicationController
       redirect_to "/"
     end
   end
+
   def message
     message = Message.find_by(id: params[:id])
     if message
@@ -31,6 +111,7 @@ class PagesController < ApplicationController
       redirect_to "/"
     end
   end
+
   def new_message
     if @current_user
       to_user = User.find_by(id: params[:id])
@@ -119,7 +200,7 @@ class PagesController < ApplicationController
 
   private
     def user_params
-      params.permit(:name, :email, :password)
+      params.permit(:name, :email, :password, :five_minute_cost, :fifteen_minute_cost, :thirty_minute_cost, :sixty_minute_cost, :skills)
     end
 
 end

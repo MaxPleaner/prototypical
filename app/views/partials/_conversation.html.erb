@@ -1,0 +1,4 @@
+<b>Conversation</b> <br> <br>
+<% current_user.messages_with(user).uniq(&:id).each do |msg| %>
+  <li><i><%= msg.from_user.name %></i>: <%= msg.content_string %></li>
+<% end %>

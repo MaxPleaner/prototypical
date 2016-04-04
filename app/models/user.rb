@@ -12,7 +12,38 @@ class User < ApplicationRecord
     primary_key: :id
   )
 
+  has_many(
+    :payment_requests,
+    foreign_key: :user_id,
+    class_name: "PaymentRequest",
+    primary_key: :id
+  )
+
+  has_many(
+    :sent_payment_requests,
+    foreign_key: :from_user_id,
+    class_name: "PaymentRequest",
+    primary_key: :id
+  )
+
+  def price_for(length)
+    raise ArgumentError unless persisted?
+    case length.to_i
+    when 5
+      five_minute_cost
+    when 15
+      fifteen_minute_cost
+    when 30
+      thirty_minute_cost
+    when 60
+      sixty_minute_cost
+    else
+      nil
+    end
+  end
+
   def messages_with(other_user)
+    raise ArgumentError unless [self, other_user].all?(&:persisted?)
     results = []
     [messages, sent_messages].each do |query|
       results << query.where(from_user_id: other_user.id)
@@ -24,6 +55,7 @@ class User < ApplicationRecord
   end
 
   def conversations
+    raise ArgumentError unless persisted?
     other_user_ids = [messages, sent_messages].map do |query|
       query.pluck(:user_id, :from_user_id)
     end.map do |array|
@@ -45,15 +77,19 @@ class User < ApplicationRecord
     result.login if result.valid?
     result
   end
+
   def password=(pwd)
     super(BCrypt::Password.create(pwd))
   end
+
   def is_user?(user)
     raise ArgumentError unless persisted?
     id.eql?(user.try(:id))
   end
+
   def password_is?(pwd)
     raise ArgumentError unless persisted?
     BCrypt::Password.new(password).is_password?(pwd)
   end
+
 end

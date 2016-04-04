@@ -17,11 +17,11 @@
       <b><a href="/user?id=<%= @current_user.id %>">Inbox</a></b>
     <% end %>
     <br>
+      <%= render "partials/user_form", user: @current_user %>
     <hr>
 
 <!-- Flash messages -->
     <%= raw flash[:messages]&.join("<br>")&.html_safe %> <hr>
-    
 
 <!-- Alerts (notifications) -->
     <%= render "partials/user_messages" %> <hr>

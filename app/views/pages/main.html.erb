@@ -1,4 +1,2 @@
-<% user =  @current_user %>
-<%= render "partials/user_form", user: user %> <hr>
-<%= render "partials/user_pinger" %>
+<% if ENV["PING"]&.downcase.eql?("true") %><%= render "partials/user_pinger" %> <% end %><hr>
 <%= render "partials/user_list" %> <hr>

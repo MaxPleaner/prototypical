@@ -1,0 +1,14 @@
+<button toggles=".register-form"><%= user.persisted? ? "edit profile" : "register" %></button> <br>
+<form class="register-form" skip-sockets action="/register" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="id" value="<%= user.id %>">
+  <input value="<%= user.name %>" type="text" name="name" placeholder="name"> <br>
+  <input value="<%= user.email %>" type="email" name="email" placeholder="email"> <br>
+  <input value="<%= user.skills %>" type="text" name="skills" placeholder="skills">
+  <input value="<%= user.five_minute_cost %>" name="five_minute_cost" type="text" placeholder="5 minute cost">
+  <input value="<%= user.fifteen_minute_cost %>" name="fifteen_minute_cost" type="text" placeholder="15 minute cost">
+  <input value="<%= user.thirty_minute_cost %>" name="thirty_minute_cost" type="text" placeholder="30 minute cost">
+  <input value="<%= user.sixty_minute_cost %>" name="sixty_minute_cost" type="text" placeholder="60 minute cost">
+  <input type="password" name="password" placeholder="password"> <br>
+  <input type="submit" value="submit">
+</form> <br>

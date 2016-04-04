@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   get "/new_message", to: "pages#new_message"
   get "/message", to: "pages#message"
   get "/clear_all", to: "pages#clear_all"
+  get "/payment_request", to: "pages#payment_request"
+  get "/accept_payment_request", to: "pages#accept_payment_request"
+  get "/decline_payment_request", to: "pages#decline_payment_request"
+  get "/pay", to: "pages#pay"
 end
