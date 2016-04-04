@@ -63,7 +63,7 @@ when starting the server with `PING=true rails server` as opposed to just `rails
 
 This can be annoying in development, which is why it can be disabled by ommitting the command line argument.
 
-##### Relevant files
+##### Important files
 
   - [app/assets/javascripts/application.js.erb](app/assets/javascripts/application.js.erb)
   - app/assets/javascripts/braintree.js (the braintree Javascript SDK, minified)
