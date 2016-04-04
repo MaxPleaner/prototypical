@@ -14,5 +14,11 @@
 //= require jquery_ujs
 //= require websocket_rails/main
 //= require socket_helpers
+//= require braintree
 // require turbolinks
 //= require_tree .
+
+BraintreeClientId = "<%= Braintree::ClientToken.generate %>"
+braintree.setup(BraintreeClientId, 'dropin', {
+  container: "pay"
+})

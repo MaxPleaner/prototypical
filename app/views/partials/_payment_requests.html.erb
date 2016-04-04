@@ -8,7 +8,16 @@
       <% else %>
         <b>accepted, awaiting payment</b>
         <% if req.from_user.is_user?(@current_user) %>
-          <a href="/pay?id=<%= req.id %>">pay</a>
+          <button class="notbutton" toggles=".pay">pay</button>
+          <div class="pay">
+            <form skip-sockets action="/pay">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <input type="hidden" name="id" value="<%= req.id %>">
+              <div id="pay"></div>
+              <input type="submit" value="submit">
+            </form>
+          </div>
+          <!-- <a href="/pay?id=<%= req.id %>">pay</a> -->
         <% end %>
       <% end %>
     <% else %>

@@ -4,18 +4,28 @@ class PagesController < ApplicationController
   end
 
   def pay
+    byebug
     if @current_user
       _payment_request = PaymentRequest.find_by(id: params[:id])
       if _payment_request
         if _payment_request.from_user.is_user?(@current_user)
-          _payment_request.update(paid: true)
-          message = Message.create(
-            content: "paid for #{_payment_request.length} minutes",
-            user_id: _payment_request.user.id,
-            from_user_id: @current_user.id
+          @result = Braintree::Transaction.sale(
+            amount: _payment_request.user.price_for(_payment_request.length),
+            payment_method_nonce: params[:payment_method_nonce]
           )
-          send_msg_to(_payment_request.user, message)
-          redirect_to "/user/#{_payment_request.user.id}"
+          if @result.success?
+            _payment_request.update(paid: true)
+            message = Message.create(
+              content: "paid for #{_payment_request.length} minutes",
+              user_id: _payment_request.user.id,
+              from_user_id: @current_user.id
+            )
+            send_msg_to(_payment_request.user, message)
+            redirect_to "/user/#{_payment_request.user.id}"
+          else
+            flash[:messages] << "There was an error with Braintree payment"
+            redirect_to "/"
+          end
         else
           flash[:messages] << "invalid credentials"
           redirect_to "/"
