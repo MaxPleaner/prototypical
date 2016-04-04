@@ -12,7 +12,7 @@ The idea is to hire quality tutors at a lower rate than other platforms.
 
 **System dependencies**: Postgres
 
-**Configuration**: Add Braintree credentials (see [config/application.yml.example](config/application.yml.example), used by [figaro](https://github.com/laserlemon/figaro))
+**Configuration**: Add Braintree credentials (see [config/application.yml.example](config/application.yml.example), used by [figaro](https://github.com/laserlemon/figaro)). Also might want to change the `ForceLogoutPassword` in [config/initializers/user_pings.rb](config/initializers/user_pings.rb).
 
 **Start app**: `rake db:create db:migrate; PING=true rails s` and open `localhost:3000`
 
