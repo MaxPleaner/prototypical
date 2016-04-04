@@ -36,21 +36,30 @@ The idea is to hire quality tutors at a lower rate than other platforms.
 
 ##### Websockets / realtime
 
-  - This is a Rails 5 app, so ActionCable is built in. However, I opted to use [websocket-rails](https://github.com/websocket-rails/websocket-rails/) and the wrapper gem I wrote around it, [socket_helpers](https://github.com/maxpleaner/socket_helpers)
-  - There are two realtime components to the app
-    1. The list of online users
-    2. The unread messages section.
-  - Notifications about payment requests are sent to the unread messages section.
-  - **how does the online users component work**
-    1. There's standard auth to set the `session_token` on users when they login
-    2. Javascript pings the server every 5 seconds (until the browser tab is closed)
-    3. A background process runs every 10 seconds and signs out any users which have stopped pinging.
-    4. websocket updates are pushed whenever a user signs in or out.
-  - **what does the `PING=true` command line argument do**
-    - when starting the server with `PING=true rails server` as opposed to just `rails server`, two things happen:
-      1. The background job (`config/initializers/user_pings.rb`) starts
-      2. The Javascript pinging client is activated (each client will ping the server every 5 seconds) 
-    - This can be annoying in development, which is why it can be disabled by ommitting the command line argument.
+This is a Rails 5 app, so ActionCable is built in. However, I opted to use [websocket-rails](https://github.com/websocket-rails/websocket-rails/) and the wrapper gem I wrote around it, [socket_helpers](https://github.com/maxpleaner/socket_helpers)
+
+There are two realtime components to the app
+
+  1. The list of online users
+  2. The unread messages section.
+
+Notifications about payment requests are sent to the unread messages section.
+
+##### How does the online users component work
+    
+1. There's standard auth to set the `session_token` on users when they login
+2. Javascript pings the server every 5 seconds (until the browser tab is closed)
+3. A background process runs every 10 seconds and signs out any users which have stopped pinging.
+4. websocket updates are pushed whenever a user signs in or out.
+
+##### what does the `PING=true` command line argument do
+
+when starting the server with `PING=true rails server` as opposed to just `rails server`, two things happen:
+
+  1. The background job (`config/initializers/user_pings.rb`) starts
+  2. The Javascript pinging client is activated (each client will ping the server every 5 seconds) 
+
+This can be annoying in development, which is why it can be disabled by ommitting the command line argument.
 
 ##### Relevant files
 
